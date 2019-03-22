@@ -7,7 +7,7 @@
  How about we try brute force? Brute force is going through all the possible placement and save all answers.
  
  
- **👇You can change the amount of queens here(3~20), Let's try small amounts first.**
+ **👇You can change the amount of queens here(4~20), Let's try small amounts first.**
  */
 //#-hidden-code
 import PlaygroundSupport
@@ -27,21 +27,21 @@ sceneView.showsFPS = true
 sceneView.showsNodeCount = true
 
 let scene = SecondScene(size: CGSize(width: 480, height: 640))
-var 💃 = 0
+var 💃 = 4
 var 😡 = true
 var 🕐 = 100
 var 🔁 = 100
 
 //#-end-hidden-code
-💃 = /*#-editable-code number of queens♕*/8/*#-end-editable-code*/
+💃 = /*#-editable-code number of queens♕*/4/*#-end-editable-code*/
 
 /*:
  
- **👇You can change the speed of animations by changing the wait time(1~1000ms).**
+ **👇You can change the speed of animations by changing the wait time(1~100000).**
  
  */
 
-🕐 = /*#-editable-code move speed*/100/*#-end-editable-code*/
+🕐 = /*#-editable-code move speed*/1/*#-end-editable-code*/
 
 /*:
  
@@ -80,7 +80,7 @@ if 🔁<1{
     scene.maxround = 🔁
 }
 
-if 💃<3{
+if 💃<4{
     scene.iterk = 3
 }else if 💃 > 20{
     scene.iterk = 20

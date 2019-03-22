@@ -23,8 +23,14 @@ public class SecondScene: SKScene {
     var FightIndex1 = 0
     var FightIndex2 = 0
     var queenpos = [Int]()
-    var animationdone = false
+    var animationdone = true
     var calciter = 0
+    
+    var solves = 0
+    
+    var Foundtext = SKLabelNode(fontNamed: "Helvetica")
+    
+    var SolveDisp = [SKLabelNode]()
 
     
     
@@ -73,31 +79,43 @@ public class SecondScene: SKScene {
         }
     }
     
+//    func calculatenext(){
+//
+//    }
+    
     func tryall() {
         print("tryall")
-        
-        while calciter<maxround{
-            
-            print(animationdone)
-            if self.animationdone{
-                calciter = calciter+1
-                queenpos[iterk] += 1
-                for i in 0..<(iterk-1){
-                    if queenpos[iterk-i] >= iterk{
-                        queenpos[iterk-i] = 0
-                        queenpos[iterk-i-1] = queenpos[iterk-i-1]+1
-                    }
-                }
-                self.animationdone = false
-                if queenpos[0]==(iterk-1){
-                    calciter = maxround+1
-                    movequeens()
-                    break
-                }
-                else{
-                    movequeens()
+        print(queenpos.endIndex)
+        queenpos[iterk-1] += 1
+        for i in 1...(iterk){
+            if queenpos[iterk-i] >= iterk{
+                print("[\(i)] = 0")
+                if iterk-i-1>=0{                    
+                    queenpos[iterk-i] = 0
+                    queenpos[iterk-i-1] = queenpos[iterk-i-1]+1 
                 }
             }
+        }
+        animationdone = false
+        if queenpos[0]==(iterk){
+            calciter = maxround+1
+            let Node_Background = SKSpriteNode(imageNamed: "CONGRATS.png")
+            Node_Background.name = "CONGRATS"
+            Node_Background.setScale(0.01)//to show background
+            Node_Background.position = CGPoint(x: frame.midX, y: frame.midY)
+            nodes.append(Node_Background)
+            addChild(nodes[nodes.endIndex-1])
+            
+            let wait = SKAction.wait(forDuration: 0.3)
+            let resize = SKAction.scale(by: 100, duration: 0.3)
+            let showfight = SKAction.sequence([wait, resize])
+            Node_Background.run(showfight)
+            movequeens()
+            
+        }
+        else{
+            movequeens()
+            
         }
     }
         
@@ -143,6 +161,35 @@ public class SecondScene: SKScene {
         addChild(nodes[nodes.endIndex-1])
         let action = SKAction.playSoundFileNamed("ding.wav", waitForCompletion: false)
         self.run(action)
+        
+
+        Foundtext.text = "Found 0 Solves"
+        Foundtext.fontSize = 30.0
+        Foundtext.fontColor = SKColor.yellow
+        Foundtext.position = CGPoint(x: self.frame.midX, y: 55)
+        self.addChild(Foundtext)
+        
+        for i in 0..<iterk{
+            let TempLabelNode = SKLabelNode(fontNamed: "Helvetica")
+            var Temptext = ""
+            for _ in 0..<iterk{
+                Temptext += "◻️"
+            }
+            TempLabelNode .text = Temptext
+//            startScreen.text = "◻️◻️💃◻️◻️◻️◻️◻️"
+            TempLabelNode .fontSize = 80/CGFloat(iterk)
+            TempLabelNode .fontColor = SKColor.yellow
+            TempLabelNode .position = CGPoint(x: self.frame.midX/2, y: CGFloat(640-(120.0/Double(iterk+1))*Double(i+1)))
+            SolveDisp.append(TempLabelNode )
+            self.addChild(SolveDisp[SolveDisp.endIndex-1])
+        }
+        
+        let startScreen = SKLabelNode(fontNamed: "Helvetica")
+        startScreen.text = "⬅️ Recent Solve"
+        startScreen.fontSize = 29.0
+        startScreen.fontColor = SKColor.yellow
+        startScreen.position = CGPoint(x: self.frame.midX*1.5, y: 580)
+        self.addChild(startScreen)
 
         for iterx in 0..<iterk  {
             for itery in 0..<iterk  {
@@ -181,17 +228,17 @@ public class SecondScene: SKScene {
     }
     
     func movequeens()  {
-        
+         checkviable()
         //over
-        for i in 1..<iterk{
+        for i in 0..<iterk{
+            print(i)
             let posx = CGFloat((Double(i)*boxsize)+40.0+boxsize/2)
-            let posy = CGFloat((Double(queenpos[i])*boxsize)+120.0+boxsize/2)
+            let posy = CGFloat((Double(queenpos[i]%iterk)*boxsize)+120.0+boxsize/2)
             let point = CGPoint(x: posx, y: posy)
-            let move1 = SKAction.move(to: point, duration: (Double(waitt)/1000))
+            let move1 = SKAction.move(to: point, duration: (Double(waitt)/100000))
             if i==iterk-1{
                 queens[i].run(move1,completion:{
-                    self.animationdone = true
-                    print(self.animationdone)
+                    self.Finishanimation()
                 })
             }else{
                 queens[i].run(move1)
@@ -201,37 +248,57 @@ public class SecondScene: SKScene {
         
     }
     
+    func Finishanimation(){
+        animationdone = true
+        print(Finishanimation)
+        if calciter <= maxround{
+            tryall()
+            calciter = calciter+1
+        }
+    }
     
-    func checkFight(ix cx: Int, iy cy: Int){
+    
+    func checkviable(){
+        var endcheck = 0
         
-        
-        for i in 0...(queens.endIndex-1){
-            print("cheking")
-            
-            
-            let tx = queenxs[i]
-            let ty = queenys[i]
-            let dx = abs(tx-cx)
-            let dy = abs(ty-cy)
-            
-            if tx==cx{
-                FightingFlag = 1
-                FightIndex1 = i
-                FightIndex2 = queens.endIndex
+        for i in 0..<(queenpos.endIndex-1){
+            if endcheck == 1{
                 break
-            }else if cy == ty{
-                FightingFlag = 1
-                FightIndex1 = i
-                FightIndex2 = queens.endIndex
-                break
-            }else if dy == dx{
-                FightingFlag = 1
-                FightIndex1 = i
-                FightIndex2 = queens.endIndex
-                break
+            }else{
+                for j in (i+1)..<queenpos.endIndex{
+                    if queenpos[i] == queenpos[j]{
+                        print("pos \(i) = pos \(j)")
+                        endcheck = 1
+                        break
+                    }else if abs(queenpos[i]-queenpos[j])==abs(i-j){
+                        
+                        print("abs \(i) = abs \(j)")
+                        endcheck = 1
+                        break
+                    }
+                }
             }
         }
-        print(FightingFlag)
+        if endcheck == 0{
+            
+            for i in 0..<iterk{
+                var TempString = ""
+                for j in 0..<iterk{
+                    if queenpos[i]==j{
+                        TempString += "💃"
+                    }else {
+                        TempString += "◻️"
+                    }
+                }
+                SolveDisp[i].text = TempString
+                
+            }
+            let action = SKAction.playSoundFileNamed("Yay.mp3", waitForCompletion: false)
+            self.run(action)
+            solves = solves+1
+            
+            Foundtext.text = "Found \(solves) Solves"
+        }
     }
     
     
