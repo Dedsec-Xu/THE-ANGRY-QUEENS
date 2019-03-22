@@ -31,6 +31,7 @@ public class SecondScene: SKScene {
     var Foundtext = SKLabelNode(fontNamed: "Helvetica")
     
     var SolveDisp = [SKLabelNode]()
+    var Finished = 0
 
     
     
@@ -98,18 +99,9 @@ public class SecondScene: SKScene {
         }
         animationdone = false
         if queenpos[0]==(iterk){
+            Finished = 1;
             calciter = maxround+1
-            let Node_Background = SKSpriteNode(imageNamed: "CONGRATS.png")
-            Node_Background.name = "CONGRATS"
-            Node_Background.setScale(0.01)//to show background
-            Node_Background.position = CGPoint(x: frame.midX, y: frame.midY)
-            nodes.append(Node_Background)
-            addChild(nodes[nodes.endIndex-1])
-            
-            let wait = SKAction.wait(forDuration: 0.3)
-            let resize = SKAction.scale(by: 100, duration: 0.3)
-            let showfight = SKAction.sequence([wait, resize])
-            Node_Background.run(showfight)
+        
             movequeens()
             
         }
@@ -159,7 +151,7 @@ public class SecondScene: SKScene {
         Node_Background.position = CGPoint(x: frame.midX, y: frame.midY)
         nodes.append(Node_Background)
         addChild(nodes[nodes.endIndex-1])
-        let action = SKAction.playSoundFileNamed("ding.wav", waitForCompletion: false)
+        let action = SKAction.playSoundFileNamed("It_Devours.mp3", waitForCompletion: false)
         self.run(action)
         
 
@@ -251,9 +243,37 @@ public class SecondScene: SKScene {
     func Finishanimation(){
         animationdone = true
         print(Finishanimation)
-        if calciter <= maxround{
+        if calciter < maxround && Finished == 0{
             tryall()
             calciter = calciter+1
+        }else if Finished == 1{
+            
+            let Node_Background = SKSpriteNode(imageNamed: "CONGRATS.png")
+            Node_Background.name = "CONGRATS"
+            Node_Background.setScale(0.01)//to show background
+            Node_Background.position = CGPoint(x: frame.midX, y: frame.midY)
+            nodes.append(Node_Background)
+            addChild(nodes[nodes.endIndex-1])
+            
+            let wait = SKAction.wait(forDuration: 0.3)
+            let resize = SKAction.scale(by: 100, duration: 0.3)
+            let showfight = SKAction.sequence([wait, resize])
+            Node_Background.run(showfight)
+            
+        }else if calciter >= maxround{
+            
+            let Node_Background = SKSpriteNode(imageNamed: "loop.png")
+            Node_Background.name = "CONGRATS"
+            Node_Background.setScale(0.01)//to show background
+            Node_Background.position = CGPoint(x: frame.midX, y: frame.midY)
+            nodes.append(Node_Background)
+            addChild(nodes[nodes.endIndex-1])
+            
+            let wait = SKAction.wait(forDuration: 0.3)
+            let resize = SKAction.scale(by: 100, duration: 0.3)
+            let showfight = SKAction.sequence([wait, resize])
+            Node_Background.run(showfight)
+            
         }
     }
     
@@ -284,7 +304,7 @@ public class SecondScene: SKScene {
             for i in 0..<iterk{
                 var TempString = ""
                 for j in 0..<iterk{
-                    if queenpos[i]==j{
+                    if queenpos[j]==(iterk-i-1){
                         TempString += "👸"
                     }else {
                         TempString += "◻️"
@@ -293,7 +313,7 @@ public class SecondScene: SKScene {
                 SolveDisp[i].text = TempString
                 
             }
-            let action = SKAction.playSoundFileNamed("Yay.mp3", waitForCompletion: false)
+            let action = SKAction.playSoundFileNamed("ding.wav", waitForCompletion: false)
             self.run(action)
             solves = solves+1
             

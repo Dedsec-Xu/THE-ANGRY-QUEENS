@@ -2,6 +2,7 @@ import PlaygroundSupport
 import SpriteKit
 import Foundation
 import GameKit
+import AVFoundation
 
 public class FirstScene: SKScene {
     private var label : SKLabelNode!
@@ -123,6 +124,8 @@ public class FirstScene: SKScene {
     }
     
     func putChess(at point: CGPoint, csize r: CGFloat, imagename name: String, chessname name2: String) {
+        let action = SKAction.playSoundFileNamed("Pop.wav", waitForCompletion: false)
+        self.run(action)
         
         let shape = SKSpriteNode()
         
@@ -149,7 +152,7 @@ public class FirstScene: SKScene {
         Node_Background.position = CGPoint(x: frame.midX, y: frame.midY)
         nodes.append(Node_Background)
         addChild(nodes[nodes.endIndex-1])
-        let action = SKAction.playSoundFileNamed("ding.wav", waitForCompletion: false)
+        let action = SKAction.playSoundFileNamed("It_Devours.mp3", waitForCompletion: false)
         self.run(action)
 
         
