@@ -10,6 +10,8 @@ public class SecondScene: SKScene {
     var lineWiseY : CGFloat = 0
     var jumpedAhead = false
     public var iterk = 8
+    
+    public var waitt = 100
     var boxsize = 0.0
     var boxes = [SKSpriteNode]()
     var queens = [SKSpriteNode]()
@@ -19,6 +21,7 @@ public class SecondScene: SKScene {
     var FightingFlag = 0
     var FightIndex1 = 0
     var FightIndex2 = 0
+    var queenpos = [Int]()
     
     
     
@@ -35,7 +38,7 @@ public class SecondScene: SKScene {
     
     public override func didMove(to view: SKView) {
         
-        let Node_Title = SKSpriteNode(imageNamed: "title.png")
+        let Node_Title = SKSpriteNode(imageNamed: "title2.png")
         Node_Title.name = "background"
         Node_Title.setScale(1)//to show background
         Node_Title.position = CGPoint(x: frame.midX, y: frame.midY)
@@ -57,52 +60,7 @@ public class SecondScene: SKScene {
             case .idle:
                 startGame()
             case .running:
-                for touch in touches {
-                    let position = touch.location(in: self)
-                    print(position)
-                    let node = self.atPoint(position)
-                    if node.name == "textureFig" {
-                        let figure = node as? SKSpriteNode
-                        let index = boxes.index(of: figure!)
-                        let iterx = (index!)/iterk
-                        let itery = (index!)%iterk
-                        let posx = CGFloat((Double(iterx)*boxsize)+40.0+boxsize/2)
-                        let posy = CGFloat((Double(itery)*boxsize)+120.0+boxsize/2)
-                        print("pos")
-                        print(iterx)
-                        print(itery)
-                        print(queens.endIndex)
-                        if queens.endIndex>0 {
-                            checkFight(ix: iterx, iy: itery)
-                            print("check")
-                        }
-                        
-                        
-                        
-                        queenxs.append(iterx)
-                        queenys.append(itery)
-                        print("append")
-                        let point = CGPoint(x: posx, y: posy)
-                        
-//                        print(index)
-//                        self.logic?.userChoose(index: index!)
-                        print(queenxs)
-                        print(queenys)
-                        
-                        print("putChess")
-                        var calcchessname = "queen"
-                        calcchessname += " "
-                        calcchessname += String(iterx)
-                        calcchessname += " "
-                        calcchessname += String(itery)
-                        putChess(at: point, csize: CGFloat(boxsize), imagename: "queen.png", chessname: calcchessname)
-                        if FightingFlag==1{
-                            Fight()
-                        }else if queens.endIndex==iterk{
-                            Congrats()
-                        }
-                    }
-                }
+                gameStatus = .running
             
             case .over:
                 gameStatus = .over
@@ -152,25 +110,79 @@ public class SecondScene: SKScene {
         let action = SKAction.playSoundFileNamed("ding.wav", waitForCompletion: false)
         self.run(action)
 
-        
-        //start
         for iterx in 0..<iterk  {
             for itery in 0..<iterk  {
                 var name = "pat2.png"
                 if ((iterx+itery)%2==0){
                     name = "pat1.png"
                 }
-                
+
                 let posx = CGFloat((Double(iterx)*boxsize)+40.0+boxsize/2)
                 let posy = CGFloat((Double(itery)*boxsize)+120.0+boxsize/2)
                 print("pos")
                 print(posy)
                 let point = CGPoint(x: posx, y: posy)
                 createPat(at: point, csize: CGFloat(boxsize), imagename: name)
-                //                createPat(at: point, csize: CGFloat(boxsize), imagename: "queen.png")
+
             }
         }
+        for i1 in 0..<iterk{
+
+            queenpos.append(0)
+            let posx = CGFloat((Double(i1)*boxsize)+40.0+boxsize/2)
+            let posy = CGFloat((Double(queenpos[i1])*boxsize)+120.0+boxsize/2)
+
+            let point = CGPoint(x: posx, y: posy)
+
+            print("putChess")
+            putChess(at: point, csize: CGFloat(boxsize), imagename: "queen.png", chessname: "queen")
+        }
         gameStatus = .running
+        for i1 in 0..<iterk{
+            
+            queenpos.append(0)
+            let posx = CGFloat((Double(i1)*boxsize)+40.0+boxsize/2)
+            let posy = CGFloat((Double(queenpos[i1])*boxsize)+120.0+boxsize/2)
+            
+            let point = CGPoint(x: posx, y: posy)
+            
+            print("putChess")
+            putChess(at: point, csize: CGFloat(boxsize), imagename: "queen.png", chessname: "queen")
+        }
+        
+        for i1 in 0..<iterk{
+            for i2 in 0..<iterk{
+                for i3 in 0..<iterk{
+                    for i4 in 0..<iterk{
+                        for i5 in 0..<iterk{
+                            for i6 in 0..<iterk{
+                                for i7 in 0..<iterk{
+                                    for i8 in 1..<iterk{
+                                        queenpos[0] = i8
+                                        queenpos[1] = i7
+                                        queenpos[2] = i6
+                                        queenpos[3] = i5
+                                        queenpos[4] = i4
+                                        queenpos[5] = i3
+                                        queenpos[6] = i2
+                                        queenpos[7] = i1
+                                        move()
+                                        print("moved")
+                                    }
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
         
     }
     
@@ -182,52 +194,21 @@ public class SecondScene: SKScene {
         
     }
     
-    func Fight(){
-        gameOver()
+    func move()  {
         
+        //over
+        for i in 1..<iterk{
+            let posx = CGFloat((Double(i)*boxsize)+40.0+boxsize/2)
+            let posy = CGFloat((Double(queenpos[i])*boxsize)+120.0+boxsize/2)
+            let point = CGPoint(x: posx, y: posy)
+            let move = SKAction.move(to: point, duration: (Double(waitt)/1000))
+            queens[i].run(move)
+        }
         
-        let action = SKAction.playSoundFileNamed("fight.mp3", waitForCompletion: false)
-        self.run(action)
-        let moveActionup = SKAction.moveBy(x: 0, y: 20, duration: 0.3)
-        let moveActiondown = SKAction.moveBy(x: 0, y: -20, duration: 0.3)
-//        let rotateAction = SKAction.rotate(byAngle: π, duration: 0.5)
-        let jump = SKAction.sequence([moveActionup, moveActiondown])
-        let Node_Background = SKSpriteNode(imageNamed: "fighting.png")
-        Node_Background.name = "background"
-        Node_Background.setScale(0.01)//to show background
-        Node_Background.position = CGPoint(x: frame.midX, y: frame.midY)
-        nodes.append(Node_Background)
-        addChild(nodes[nodes.endIndex-1])
+        gameStatus = .over
         
-        let wait = SKAction.wait(forDuration: 0.3)
-        let resize = SKAction.scale(by: 100, duration: 0.3)
-        let showfight = SKAction.sequence([wait, resize])
-        
-        queens[FightIndex1].run(jump)
-        Node_Background.run(showfight)
     }
     
-    func Congrats(){
-        gameOver()
-        
-        
-        let action = SKAction.playSoundFileNamed("Yay.mp3", waitForCompletion: false)
-        self.run(action)
-       
-        let Node_Background = SKSpriteNode(imageNamed: "CONGRATS.png")
-        Node_Background.name = "CONGRATS"
-        Node_Background.setScale(0.01)//to show background
-        Node_Background.position = CGPoint(x: frame.midX, y: frame.midY)
-        nodes.append(Node_Background)
-        addChild(nodes[nodes.endIndex-1])
-        
-        let wait = SKAction.wait(forDuration: 0.3)
-        let resize = SKAction.scale(by: 100, duration: 0.3)
-        let showfight = SKAction.sequence([wait, resize])
-        
-
-        Node_Background.run(showfight)
-    }
     
     func checkFight(ix cx: Int, iy cy: Int){
         

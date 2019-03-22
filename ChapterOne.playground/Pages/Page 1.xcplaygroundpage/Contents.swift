@@ -62,4 +62,4 @@ PlaygroundSupport.PlaygroundPage.current.liveView = sceneView
 /*:
  **👇proceed to the nect page after you learn enough about the rules**
  */
-//: [Next](@next)
+//: [I understand the rules](@next)
