@@ -6,7 +6,12 @@
  
  ## What is eight queens puzzle♕?
  The eight queens puzzle♕ is the problem of placing 8 chess queens♕ on an 8×8 chessboardc so that no two queens threaten each other.
- In other words, All the queens are angry😡 at each other. So the solution💡 requires no two queens share the same row, column, or diagonal. Otherwise, they'll start to fight.
+ 
+ 
+ **In other words, All the queens are angry😡 at each other. They are so mad😡 at each other that if they see another queen♕ at their attack range⛳️, there will be a fight🏹!** So the solution💡 requires no two queens share the same row, column, or diagonal. Otherwise, they'll start to fight.
+ 
+ 
+  This puzzle is not only a classic chess♙ puzzle, but also an famous algorithm🖥 problem
  
   ![one solution](sample.png)
 
@@ -54,3 +59,7 @@ sceneView.presentScene(scene)
 
 PlaygroundSupport.PlaygroundPage.current.liveView = sceneView
 //#-end-hidden-code
+/*:
+ **👇proceed to the nect page after you learn enough about the rules**
+ */
+//: [Next](@next)

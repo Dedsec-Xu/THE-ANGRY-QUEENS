@@ -3,7 +3,7 @@ import SpriteKit
 import Foundation
 import GameKit
 
-public class FirstScene: SKScene {
+public class SecondScene: SKScene {
     private var label : SKLabelNode!
     let buttonNodeName = "button"
     var lineWiseX : CGFloat = 0
