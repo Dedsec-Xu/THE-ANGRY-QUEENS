@@ -27,13 +27,13 @@ sceneView.showsFPS = true
 sceneView.showsNodeCount = true
 
 let scene = SecondScene(size: CGSize(width: 480, height: 640))
-var 💃 = 4
+var 👸 = 4
 var 😡 = true
 var 🕐 = 100
 var 🔁 = 100
 
 //#-end-hidden-code
-💃 = /*#-editable-code number of queens♕*/4/*#-end-editable-code*/
+👸 = /*#-editable-code number of queens♕*/4/*#-end-editable-code*/
 
 /*:
  
@@ -80,12 +80,12 @@ if 🔁<1{
     scene.maxround = 🔁
 }
 
-if 💃<4{
+if 👸<4{
     scene.iterk = 3
-}else if 💃 > 20{
+}else if 👸 > 20{
     scene.iterk = 20
 }else{
-    scene.iterk = 💃
+    scene.iterk = 👸
 }
 
 scene.scaleMode = .aspectFill
@@ -99,7 +99,7 @@ PlaygroundSupport.PlaygroundPage.current.liveView = sceneView
 /*:
  # This is going to take forever!
  
- It seems that brute force is too slow🐢 when 💃 is too big!
+ It seems that brute force is too slow🐢 when 👸 is too big!
  
  
  Let's do a small calculation:

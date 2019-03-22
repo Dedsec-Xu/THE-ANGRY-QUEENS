@@ -41,17 +41,17 @@ sceneView.showsFPS = true
 sceneView.showsNodeCount = true
 
 let scene = FirstScene(size: CGSize(width: 480, height: 640))
-var 💃 = 0
+var 👸 = 0
 //#-end-hidden-code
-💃 = /*#-editable-code number of queens♕*/8/*#-end-editable-code*/
+👸 = /*#-editable-code number of queens♕*/8/*#-end-editable-code*/
 //#-hidden-code
 
-if 💃<3{
+if 👸<3{
     scene.iterk = 3
-}else if 💃 > 20{
+}else if 👸 > 20{
     scene.iterk = 20
 }else{
-    scene.iterk = 💃
+    scene.iterk = 👸
 }
 scene.scaleMode = .aspectFill
 

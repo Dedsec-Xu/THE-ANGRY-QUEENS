@@ -285,7 +285,7 @@ public class SecondScene: SKScene {
                 var TempString = ""
                 for j in 0..<iterk{
                     if queenpos[i]==j{
-                        TempString += "💃"
+                        TempString += "👸"
                     }else {
                         TempString += "◻️"
                     }
