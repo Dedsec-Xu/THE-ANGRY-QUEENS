@@ -30,9 +30,10 @@ let scene = SecondScene(size: CGSize(width: 480, height: 640))
 var 💃 = 0
 var 😡 = true
 var 🕐 = 100
+var 🔁 = 100
 
 //#-end-hidden-code
-💃 = /*#-editable-code number of queens♕*/4/*#-end-editable-code*/
+💃 = /*#-editable-code number of queens♕*/8/*#-end-editable-code*/
 
 /*:
  
@@ -43,6 +44,14 @@ var 🕐 = 100
 🕐 = /*#-editable-code move speed*/100/*#-end-editable-code*/
 
 /*:
+ 
+ **👇You can change the max loop limit here.**
+ 
+ */
+
+🔁 = /*#-editable-code move speed*/10000/*#-end-editable-code*/
+
+/*:
  **This 👇LOOP**
  */
 if 😡==false{
@@ -50,6 +59,7 @@ if 😡==false{
 }else{
     //wait for 🕐 ms
     //ChangeQueenPosition
+    //if looptime>🔁 break
 }
 
 //#-hidden-code
@@ -60,6 +70,14 @@ if 🕐<1{
     scene.waitt = 1000
 }else{
     scene.waitt = 🕐
+}
+
+if 🔁<1{
+    scene.maxround = 1
+}else if 🔁 > 100000{
+    scene.maxround = 1000
+}else{
+    scene.maxround = 🔁
 }
 
 if 💃<3{

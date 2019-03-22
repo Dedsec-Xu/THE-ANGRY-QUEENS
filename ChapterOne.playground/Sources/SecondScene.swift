@@ -12,6 +12,7 @@ public class SecondScene: SKScene {
     public var iterk = 8
     
     public var waitt = 100
+    public var maxround = 100
     var boxsize = 0.0
     var boxes = [SKSpriteNode]()
     var queens = [SKSpriteNode]()
@@ -22,6 +23,9 @@ public class SecondScene: SKScene {
     var FightIndex1 = 0
     var FightIndex2 = 0
     var queenpos = [Int]()
+    var animationdone = false
+    var calciter = 0
+
     
     
     
@@ -59,11 +63,41 @@ public class SecondScene: SKScene {
         switch gameStatus {
             case .idle:
                 startGame()
-            case .running:
                 gameStatus = .running
+            case .running:
+                tryall()
+                gameStatus = .over
             
             case .over:
                 gameStatus = .over
+        }
+    }
+    
+    func tryall() {
+        print("tryall")
+        
+        while calciter<maxround{
+            
+            print(animationdone)
+            if self.animationdone{
+                calciter = calciter+1
+                queenpos[iterk] += 1
+                for i in 0..<(iterk-1){
+                    if queenpos[iterk-i] >= iterk{
+                        queenpos[iterk-i] = 0
+                        queenpos[iterk-i-1] = queenpos[iterk-i-1]+1
+                    }
+                }
+                self.animationdone = false
+                if queenpos[0]==(iterk-1){
+                    calciter = maxround+1
+                    movequeens()
+                    break
+                }
+                else{
+                    movequeens()
+                }
+            }
         }
     }
         
@@ -119,7 +153,6 @@ public class SecondScene: SKScene {
 
                 let posx = CGFloat((Double(iterx)*boxsize)+40.0+boxsize/2)
                 let posy = CGFloat((Double(itery)*boxsize)+120.0+boxsize/2)
-                print("pos")
                 print(posy)
                 let point = CGPoint(x: posx, y: posy)
                 createPat(at: point, csize: CGFloat(boxsize), imagename: name)
@@ -133,57 +166,10 @@ public class SecondScene: SKScene {
             let posy = CGFloat((Double(queenpos[i1])*boxsize)+120.0+boxsize/2)
 
             let point = CGPoint(x: posx, y: posy)
-
-            print("putChess")
             putChess(at: point, csize: CGFloat(boxsize), imagename: "queen.png", chessname: "queen")
         }
+        
         gameStatus = .running
-        for i1 in 0..<iterk{
-            
-            queenpos.append(0)
-            let posx = CGFloat((Double(i1)*boxsize)+40.0+boxsize/2)
-            let posy = CGFloat((Double(queenpos[i1])*boxsize)+120.0+boxsize/2)
-            
-            let point = CGPoint(x: posx, y: posy)
-            
-            print("putChess")
-            putChess(at: point, csize: CGFloat(boxsize), imagename: "queen.png", chessname: "queen")
-        }
-        
-        for i1 in 0..<iterk{
-            for i2 in 0..<iterk{
-                for i3 in 0..<iterk{
-                    for i4 in 0..<iterk{
-                        for i5 in 0..<iterk{
-                            for i6 in 0..<iterk{
-                                for i7 in 0..<iterk{
-                                    for i8 in 1..<iterk{
-                                        queenpos[0] = i8
-                                        queenpos[1] = i7
-                                        queenpos[2] = i6
-                                        queenpos[3] = i5
-                                        queenpos[4] = i4
-                                        queenpos[5] = i3
-                                        queenpos[6] = i2
-                                        queenpos[7] = i1
-                                        move()
-                                        print("moved")
-                                    }
-                                    
-                                }
-                                
-                            }
-                            
-                        }
-                        
-                    }
-                    
-                }
-                
-            }
-            
-        }
-        
     }
     
     func gameOver()  {
@@ -194,18 +180,24 @@ public class SecondScene: SKScene {
         
     }
     
-    func move()  {
+    func movequeens()  {
         
         //over
         for i in 1..<iterk{
             let posx = CGFloat((Double(i)*boxsize)+40.0+boxsize/2)
             let posy = CGFloat((Double(queenpos[i])*boxsize)+120.0+boxsize/2)
             let point = CGPoint(x: posx, y: posy)
-            let move = SKAction.move(to: point, duration: (Double(waitt)/1000))
-            queens[i].run(move)
+            let move1 = SKAction.move(to: point, duration: (Double(waitt)/1000))
+            if i==iterk-1{
+                queens[i].run(move1,completion:{
+                    self.animationdone = true
+                    print(self.animationdone)
+                })
+            }else{
+                queens[i].run(move1)
+            }
+            
         }
-        
-        gameStatus = .over
         
     }
     
