@@ -189,20 +189,20 @@ public class FirstScene: SKScene {
         let moveActionup = SKAction.moveBy(x: 0, y: 20, duration: 0.3)
         let moveActiondown = SKAction.moveBy(x: 0, y: -20, duration: 0.3)
 //        let rotateAction = SKAction.rotate(byAngle: π, duration: 0.5)
-        let moveAndRotate = SKAction.sequence([moveActionup, moveActiondown])
+        let jump = SKAction.sequence([moveActionup, moveActiondown])
         let Node_Background = SKSpriteNode(imageNamed: "fighting.png")
         Node_Background.name = "background"
-        Node_Background.setScale(0.0001)//to show background
+        Node_Background.setScale(0.01)//to show background
         Node_Background.position = CGPoint(x: frame.midX, y: frame.midY)
         nodes.append(Node_Background)
         addChild(nodes[nodes.endIndex-1])
         
-        let wait = SKAction.wait(forDuration: 0.5)
-        let resize = SKAction.resize(toWidth: 480,toHeight: 640, duration: 0.3)
+        let wait = SKAction.wait(forDuration: 0.3)
+        let resize = SKAction.scale(by: 100, duration: 0.3)
         let showfight = SKAction.sequence([wait, resize])
         
-        queens[FightIndex1].run(moveAndRotate)
-        nodes[nodes.endIndex-1].run(showfight)
+        queens[FightIndex1].run(jump)
+        Node_Background.run(showfight)
     }
     
     func checkFight(ix cx: Int, iy cy: Int){
