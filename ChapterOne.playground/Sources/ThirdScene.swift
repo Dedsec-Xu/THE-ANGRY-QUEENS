@@ -3,13 +3,14 @@ import SpriteKit
 import Foundation
 import GameKit
 
-public class SecondScene: SKScene {
+public class ThirdScene: SKScene {
     private var label : SKLabelNode!
     let buttonNodeName = "button"
     var lineWiseX : CGFloat = 0
     var lineWiseY : CGFloat = 0
     var jumpedAhead = false
     public var iterk = 8
+    
     public var waitt = 100
     public var maxround = 100
     var boxsize = 0.0
@@ -24,10 +25,17 @@ public class SecondScene: SKScene {
     var queenpos = [Int]()
     var animationdone = true
     var calciter = 0
+    
     var solves = 0
+    
     var Foundtext = SKLabelNode(fontNamed: "Helvetica")
+    
     var SolveDisp = [SKLabelNode]()
     var Finished = 0
+
+    
+    
+    
     
     enum GameStatus {
         case idle//initialize
@@ -312,6 +320,21 @@ public class SecondScene: SKScene {
             Foundtext.text = "Found \(solves) Solves"
         }
     }
+    
+    
+
+
+        
+        
+        
+        
         //addLinewiseShape()
+        
+        
+        
         // let Str_ButtonName = "button";
+    
+    
+    
+    
 }

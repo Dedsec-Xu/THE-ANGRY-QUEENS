@@ -4,6 +4,9 @@
  Having gone through the little game👾, we have learnt about the rules. We also know: This is not an easy puzzle. So how do we solve it?
  
  
+ ![bfsample](bfsample.png)
+ 
+ 
  How about we try brute force? Brute force is going through all the possible placement and save all answers.
  
  
@@ -112,5 +115,7 @@ PlaygroundSupport.PlaygroundPage.current.liveView = sceneView
  
  
  **👇Just go to next page**
- */
-//: [Another approach](@next)
+
+ 
+ ## [Another approach](@next)
+  */

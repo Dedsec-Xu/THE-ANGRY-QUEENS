@@ -61,5 +61,8 @@ PlaygroundSupport.PlaygroundPage.current.liveView = sceneView
 //#-end-hidden-code
 /*:
  **👇proceed to the nect page after you learn enough about the rules**
- */
-//: ## [I understand the rules. Go to next page](@next)
+ 
+
+ 
+ ## [I understand the rules. Go to next page](@next)
+  */
