@@ -36,7 +36,7 @@ var 🕐 = 100
 var 🔁 = 100
 
 //#-end-hidden-code
-👸 = /*#-editable-code number of queens♕*/5/*#-end-editable-code*/
+👸 = /*#-editable-code number of queens♕*/8/*#-end-editable-code*/
 
 /*:
  

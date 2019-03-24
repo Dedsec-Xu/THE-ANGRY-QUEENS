@@ -19,7 +19,7 @@ Each node indicates the position of the queen on her row. The brute force algori
  ![cutted](cutted.png)
  
  
- The way we do it is using backtracking algorithm. When one 
+ The way we do it is using backtracking algorithm. When one try failed, the program tracks back to the father node and place the queen at another spot. This loops until all solves are found.
  
  How about we try brute force? Brute force is going through all the possible placement and save all answers.
  
@@ -46,7 +46,7 @@ sceneView.showsNodeCount = true
 let scene = ThirdScene(size: CGSize(width: 480, height: 640))
 var 👸 = 4
 var 😡 = true
-var 🕐 = 100
+var 🕐 = 1000
 var 🔁 = 100
 
 //#-end-hidden-code
@@ -58,7 +58,7 @@ var 🔁 = 100
  
  */
 
-🕐 = /*#-editable-code move speed*/1/*#-end-editable-code*/
+🕐 = /*#-editable-code move speed*/10/*#-end-editable-code*/
 
 /*:
  
