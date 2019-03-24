@@ -20,6 +20,7 @@ public class FirstScene: SKScene {
     var FightingFlag = 0
     var FightIndex1 = 0
     var FightIndex2 = 0
+    var BGM = AVAudioPlayer()
     
     
     
@@ -35,6 +36,15 @@ public class FirstScene: SKScene {
 
     
     public override func didMove(to view: SKView) {
+        let BGMpath = Bundle.main.path(forResource: "It_Devours", ofType: "mp3")!
+        let BGMurl = URL(fileURLWithPath: BGMpath)
+        do{
+            
+            BGM = try AVAudioPlayer(contentsOf: BGMurl)
+        }catch{
+            print("❗️no music file")
+        }
+        BGM.numberOfLoops = -1
         
         let Node_Title = SKSpriteNode(imageNamed: "title.png")
         Node_Title.name = "background"
@@ -146,6 +156,8 @@ public class FirstScene: SKScene {
     }
     
     func startGame()  {
+        
+        BGM.play()
         let Node_Background = SKSpriteNode(imageNamed: "back.png")
         Node_Background.name = "background"
         Node_Background.setScale(1)//to show background

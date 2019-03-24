@@ -29,6 +29,9 @@ public class SecondScene: SKScene {
     var SolveDisp = [SKLabelNode]()
     var Finished = 0
     
+    
+    var BGM = AVAudioPlayer()
+    
     enum GameStatus {
         case idle//initialize
         case running//running
@@ -40,6 +43,17 @@ public class SecondScene: SKScene {
 
     
     public override func didMove(to view: SKView) {
+        
+        let BGMpath = Bundle.main.path(forResource: "It_Devours", ofType: "mp3")!
+        let BGMurl = URL(fileURLWithPath: BGMpath)
+        do{
+            
+            BGM = try AVAudioPlayer(contentsOf: BGMurl)
+        }catch{
+            print("❗️no music file")
+        }
+        
+        BGM.numberOfLoops = -1
         
         let Node_Title = SKSpriteNode(imageNamed: "title2.png")
         Node_Title.name = "background"
@@ -143,8 +157,9 @@ public class SecondScene: SKScene {
         Node_Background.position = CGPoint(x: frame.midX, y: frame.midY)
         nodes.append(Node_Background)
         addChild(nodes[nodes.endIndex-1])
-        let action = SKAction.playSoundFileNamed("It_Devours.mp3", waitForCompletion: false)
-        self.run(action)
+        BGM.play()
+//        let action = SKAction.playSoundFileNamed("It_Devours.mp3", waitForCompletion: false)
+//        self.run(action)
         
 
         Foundtext.text = "Found 0 Solves"

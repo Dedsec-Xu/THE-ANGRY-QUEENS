@@ -211,8 +211,7 @@ public class ThirdScene: SKScene {
             let resize = SKAction.scale(by: 100, duration: 0.3)
             let showfight = SKAction.sequence([wait, resize])
             Node_Background.run(showfight)
-            let action = SKAction.playSoundFileNamed("Yay.mp3", waitForCompletion: false)
-            self.run(action)
+            
         }
     
     }
