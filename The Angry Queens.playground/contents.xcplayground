@@ -4,6 +4,6 @@
         <page name='What Is Eight Queens'/>
         <page name='Brute Force'/>
         <page name='Backtracking Algorithm'/>
-        <page name='END'/>
+        <page name='Little Game'/>
     </pages>
 </playground>

@@ -11,7 +11,7 @@
  ![bfsample](bfsample.png)
  
  
- How about we try brute force? Brute force is going through all the possible placement and save all answers.
+ How about we try brute force? Brute force is going through all the possible placement and save all answers. We check if any queens are angry😡 in every loop and save the answers. Now, let's press play button see how well this algorithm do.
  
  
  **The code for the Brute Force LOOP🔁**
@@ -102,21 +102,21 @@ PlaygroundSupport.PlaygroundPage.current.liveView = sceneView
 
 //#-end-hidden-code
 /*:
- # This is going to take forever!
+ # Result: This is going to take forever!
  
  It seems that brute force is too slow🐢 when 👸 is too big!
  
  
  Let's do a small calculation:
- n queens problem have n^2Cn possible solves. So it takes 64C8 loops, which is 4426165368 loops to solve the  8 queens problem... This is gonna take forever. Let's try a different approach.
- 
+ n queens problem have n^2Cn possible solves. So it takes 64C8 loops, which is 4426165368 loops to solve the  8 queens problem... This is gonna take forever.
  Fixing queens to seperated rows didn't help much either. It still takes 8^8 loops, which is 16777216 loops.
- 
  
  ![nCr formula](ncr.png)
  
+ We should try a different approach.
  
- **👇Just go to next page**
+ 
+ **👇different approach on the next page**
 
  
  ## [Another approach](@next)

@@ -4,18 +4,18 @@
  
   ![title](3title.png)
  
- As we can see, In brute force process. When the 👸queens in the first two rows are already fighting, the program is still trying to move the queens in other rows, which is a completely waste of time.
+ As we can see, In brute force process. When the 👸queens in the first two rows are already fighting, the program is still trying to move the queens in other rows, which is a completely waste of time🕐.
  
  
  ![waste](waste.png)
  
- In order to solve this problem, we should first learn about how searches work. Here is a search tree🌲.
+ In order to solve this problem, we should first learn about how searches work. Here is a search tree🌲. Each node indicates the position of the 👸queen on her row. So the 🌲tree can represent all possible solves, which is called the search space.
  
  
  ![tree](tree.png)
  
  
-Each node indicates the position of the 👸queen on her row. So the 🌲tree can represent all possible solves, which is called the search space. Search process is to find all solves in the tree. The brute force💪 algorithm goes through the whole 🌲tree. So if we can cut the brach whenever the already placed queens are fighting and stop search deeper, we should be able to see a huge improvement on speed. This is called Pruning.
+ Search process is to find all solves in the tree. The brute force💪 algorithm goes through the whole 🌲tree. So if we can cut the brach whenever the already placed queens are fighting and stop search deeper, we should be able to see a huge improvement on speed. This is called Pruning.
  
  
  ![cutted](cutted.png)
@@ -102,7 +102,7 @@ PlaygroundSupport.PlaygroundPage.current.liveView = sceneView
 /*:
  # Result: This is way faster!
  
- After implementing the backtracking↩️ algorithm. The improvement on speed is significant. You can try different 👸 values to see clearly how the algorithm works.
+ After implementing the backtracking↩️ algorithm. The improvement on speed is significant. You can try different 👸 values to see clearly how the algorithm works. Compare the results with the chart below.
  
  
  ![solves](solves.jpg)
@@ -114,7 +114,7 @@ PlaygroundSupport.PlaygroundPage.current.liveView = sceneView
  ![Sudoku](Sudoku.gif)
  
  
- Time for a little game👾. 
+ Time for a little game👾 after study. 
  
  **👇Little game👾**
  */
