@@ -154,7 +154,6 @@ public class XGame: SKScene {
             total = total+1
             queenlib.append(queenpos2)
             print("total is \(total)")
-            Foundtext.text = "Found \(total) Solves"
             
         }else{
             for col in 0..<iterk {
@@ -192,17 +191,7 @@ public class XGame: SKScene {
     
     func startGame()  {
         
-        Foundtext.text = "Round 1 of \(MaxRound) rounds"
-        Foundtext.fontSize = 30.0
-        Foundtext.fontColor = SKColor.yellow
-        Foundtext.position = CGPoint(x: self.frame.midX, y: 60)
-        addChild(Foundtext)
         
-        Node_Congrats.name = "CONGRATS"
-        Node_Congrats.setScale(0.01)//to show background
-        Node_Congrats.position = CGPoint(x: frame.midX, y: frame.midY)
-        Node_Congrats.alpha = 0
-        addChild(Node_Congrats)
         
         lastround = Int(floor(Double(MaxRound)/Double(iterk)))
         if lastround<1{
@@ -217,6 +206,17 @@ public class XGame: SKScene {
         Node_Background.position = CGPoint(x: frame.midX, y: frame.midY)
         nodes.append(Node_Background)
         addChild(nodes[nodes.endIndex-1])
+        Foundtext.text = "Round 1 of \(MaxRound) rounds"
+        Foundtext.fontSize = 30.0
+        Foundtext.fontColor = SKColor.yellow
+        Foundtext.position = CGPoint(x: self.frame.midX, y: 60)
+        addChild(Foundtext)
+        
+        Node_Congrats.name = "CONGRATS"
+        Node_Congrats.setScale(0.01)//to show background
+        Node_Congrats.position = CGPoint(x: frame.midX, y: frame.midY)
+        Node_Congrats.alpha = 0
+        addChild(Node_Congrats)
         
         BGM.play()
         
