@@ -2,6 +2,8 @@ import PlaygroundSupport
 import SpriteKit
 import Foundation
 import GameKit
+import AVFoundation
+
 
 public class ThirdScene: SKScene {
     private var label : SKLabelNode!
@@ -31,9 +33,10 @@ public class ThirdScene: SKScene {
     var endloop = 0
     
     var draw = 0
+    
+    var BGM = AVAudioPlayer()
+    
 
-    
-    
     
     
     enum GameStatus {
@@ -47,7 +50,15 @@ public class ThirdScene: SKScene {
 
     
     public override func didMove(to view: SKView) {
-        
+        let BGMpath = Bundle.main.path(forResource: "It_Devours", ofType: "mp3")!
+        let BGMurl = URL(fileURLWithPath: BGMpath)
+        do{
+            
+             BGM = try AVAudioPlayer(contentsOf: BGMurl)
+        }catch{
+            print("❗️no music file")
+        }
+        BGM.numberOfLoops = -1
         let Node_Title = SKSpriteNode(imageNamed: "backtracking.png")
         Node_Title.name = "background"
         Node_Title.setScale(1)//to show background
@@ -110,6 +121,7 @@ public class ThirdScene: SKScene {
         }
         else if currentrow==iterk-1&&is_ok(at: currentrow){
             total = total+1
+            draw = 2
             print(queenpos2)
             for i in 0..<iterk{
                 var TempString = ""
@@ -131,7 +143,11 @@ public class ThirdScene: SKScene {
         }
         
         for it in (currentrow+1)..<iterk{
-            queens[it].alpha = 0.25
+            queens[it].alpha = 0
+            let posx = CGFloat((Double(it)*boxsize)+40.0+boxsize/2)
+            let posy = CGFloat(120.0+boxsize/2)
+            let point = CGPoint(x: posx, y: posy)
+            queens[it].position = point
         }
         for it in 0...currentrow{
             queens[it].alpha = 1
@@ -144,20 +160,33 @@ public class ThirdScene: SKScene {
             
                 
         }
-        else{
+        else if draw == 1{
             draw = 0
             print("\(currentrow)")
             let posx = CGFloat((Double(currentrow-1)*boxsize)+40.0+boxsize/2)
             let posy = CGFloat((Double(queenpos2[currentrow-1]%iterk)*boxsize)+120.0+boxsize/2)
             let point = CGPoint(x: posx, y: posy)
             
-            let move1 = SKAction.move(to: point, duration: (Double(waitt)/100000))
+            let move1 = SKAction.move(to: point, duration: (Double(waitt)/1000))
             if endloop==0{
                 queens[currentrow-1].run(move1, completion: {
                     self.putqueen()
                 })
             }
             
+        }else if draw == 2{
+            draw = 0
+            print("\(currentrow)")
+            let posx = CGFloat((Double(currentrow)*boxsize)+40.0+boxsize/2)
+            let posy = CGFloat((Double(queenpos2[currentrow]%iterk)*boxsize)+120.0+boxsize/2)
+            let point = CGPoint(x: posx, y: posy)
+            
+            let move1 = SKAction.move(to: point, duration: (Double(waitt)/1000))
+            if endloop==0{
+                queens[currentrow].run(move1, completion: {
+                    self.putqueen()
+                })
+            }
         }
         
         if endloop==1{
@@ -168,7 +197,7 @@ public class ThirdScene: SKScene {
                 let posy = CGFloat((Double(queenpos2[it]%iterk)*boxsize)+120.0+boxsize/2)
                 let point = CGPoint(x: posx, y: posy)
                 
-                let move1 = SKAction.move(to: point, duration: (Double(waitt)/100000))
+                let move1 = SKAction.move(to: point, duration: (Double(waitt)/1000))
                 queens[it].run(move1)
             }
             let Node_Background = SKSpriteNode(imageNamed: "CONGRATS.png")
@@ -182,15 +211,10 @@ public class ThirdScene: SKScene {
             let resize = SKAction.scale(by: 100, duration: 0.3)
             let showfight = SKAction.sequence([wait, resize])
             Node_Background.run(showfight)
+            let action = SKAction.playSoundFileNamed("Yay.mp3", waitForCompletion: false)
+            self.run(action)
         }
-        
-        
-            
-//                            let waitAction = SKAction.wait(forDuration: (Double(waitt)/100000))
-//                            self.run(waitAction)
-        
-            
-        
+    
     }
     
     
@@ -303,9 +327,10 @@ public class ThirdScene: SKScene {
         Node_Background.position = CGPoint(x: frame.midX, y: frame.midY)
         nodes.append(Node_Background)
         addChild(nodes[nodes.endIndex-1])
-        let action = SKAction.playSoundFileNamed("It_Devours.mp3", waitForCompletion: false)
-        self.run(action)
+//        let action = SKAction.playSoundFileNamed("It_Devours.mp3", waitForCompletion: false)
+//        self.run(action)
         
+        BGM.play()
 
         Foundtext.text = "Found 0 Solves"
         Foundtext.fontSize = 30.0

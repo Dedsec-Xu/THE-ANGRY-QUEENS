@@ -50,13 +50,13 @@ var 🕐 = 100
 var 🔁 = 100
 
 //#-end-hidden-code
-👸 = /*#-editable-code number of queens♕*/5/*#-end-editable-code*/
+👸 = /*#-editable-code number of queens♕*/4/*#-end-editable-code*/
 /*:
  
- **👇You can change the speed of animations by changing the wait time(1~100000).**
+ **👇You can change the speed of animations by changing the wait time(1~1000).**
  
  */
-🕐 = /*#-editable-code move speed*/1/*#-end-editable-code*/
+🕐 = /*#-editable-code move speed*/200/*#-end-editable-code*/
 /*:
  
  **👇You can change the max loop limit here(1~20000).**

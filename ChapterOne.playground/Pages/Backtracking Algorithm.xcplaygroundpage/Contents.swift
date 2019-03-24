@@ -68,7 +68,7 @@ var 🕐 = 1000
  **👇You can change the speed of animations by changing the wait time(1~1000).**
  
  */
-🕐 = /*#-editable-code move speed*/1/*#-end-editable-code*/
+🕐 = /*#-editable-code move speed*/200/*#-end-editable-code*/
 //#-hidden-code
 
 if 🕐<1{

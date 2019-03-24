@@ -219,7 +219,7 @@ public class SecondScene: SKScene {
             let posx = CGFloat((Double(i)*boxsize)+40.0+boxsize/2)
             let posy = CGFloat((Double(queenpos[i]%iterk)*boxsize)+120.0+boxsize/2)
             let point = CGPoint(x: posx, y: posy)
-            let move1 = SKAction.move(to: point, duration: (Double(waitt)/100000))
+            let move1 = SKAction.move(to: point, duration: (Double(waitt)/1000))
             if i==iterk-1{
                 queens[i].run(move1,completion:{
                     self.Finishanimation()
@@ -251,6 +251,8 @@ public class SecondScene: SKScene {
             let resize = SKAction.scale(by: 100, duration: 0.3)
             let showfight = SKAction.sequence([wait, resize])
             Node_Background.run(showfight)
+            let action = SKAction.playSoundFileNamed("Yay.mp3", waitForCompletion: false)
+            self.run(action)
             
         }else if calciter >= maxround{
             
