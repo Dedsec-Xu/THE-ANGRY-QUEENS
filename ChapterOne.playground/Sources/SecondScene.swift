@@ -187,7 +187,7 @@ public class SecondScene: SKScene {
         startScreen.text = "⬅️ Recent Solve"
         startScreen.fontSize = 29.0
         startScreen.fontColor = SKColor.yellow
-        startScreen.position = CGPoint(x: self.frame.midX*1.5, y: 580)
+        startScreen.position = CGPoint(x: self.frame.midX*1.3, y: 580)
         self.addChild(startScreen)
 
         for iterx in 0..<iterk  {

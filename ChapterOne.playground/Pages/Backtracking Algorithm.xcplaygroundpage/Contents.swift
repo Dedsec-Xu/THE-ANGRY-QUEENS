@@ -62,7 +62,7 @@ var 😡 = true
 var 🕐 = 1000
 
 //#-end-hidden-code
-👸 = /*#-editable-code number of queens♕*/8/*#-end-editable-code*/
+👸 = /*#-editable-code number of queens♕*/4/*#-end-editable-code*/
 /*:
  
  **👇You can change the speed of animations by changing the wait time(1~1000).**
