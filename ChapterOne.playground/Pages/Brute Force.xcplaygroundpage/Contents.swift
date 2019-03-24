@@ -10,6 +10,20 @@
  How about we try brute force? Brute force is going through all the possible placement and save all answers.
  
  
+ **The code for the Brute Force LOOP🔁**
+ ```swift
+ if 😡==false{
+    save💾()
+ }else{
+    wait for 🕐
+    ChangeQueenPosition()
+    if looptime>🔁{
+        break
+    }
+ }
+ ```
+ 
+ 
  **👇You can change the amount of queens here(4~10), Let's try small amounts first. (numbers larger than 5 will no finish)**
  */
 //#-hidden-code
@@ -36,35 +50,19 @@ var 🕐 = 100
 var 🔁 = 100
 
 //#-end-hidden-code
-👸 = /*#-editable-code number of queens♕*/8/*#-end-editable-code*/
-
+👸 = /*#-editable-code number of queens♕*/5/*#-end-editable-code*/
 /*:
  
  **👇You can change the speed of animations by changing the wait time(1~100000).**
  
  */
-
 🕐 = /*#-editable-code move speed*/1/*#-end-editable-code*/
-
 /*:
  
  **👇You can change the max loop limit here(1~20000).**
  
  */
-
 🔁 = /*#-editable-code move speed*/10000/*#-end-editable-code*/
-
-/*:
- **This 👇LOOP**
- */
-if 😡==false{
-    //save💾
-}else{
-    //wait for 🕐 
-    //ChangeQueenPosition
-    //if looptime>🔁 break
-}
-
 //#-hidden-code
 
 if 🕐<1{

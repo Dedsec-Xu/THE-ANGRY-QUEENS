@@ -10,30 +10,17 @@ public class ThirdScene: SKScene {
     var lineWiseY : CGFloat = 0
     var jumpedAhead = false
     public var iterk = 8
-    
     public var waitt = 100
-    public var maxround = 100
     var boxsize = 0.0
     var boxes = [SKSpriteNode]()
     var queens = [SKSpriteNode]()
     var nodes = [SKSpriteNode]()
-    var queenxs = [Int]()
-    var queenys = [Int]()
-    var FightingFlag = 0
-    var FightIndex1 = 0
-    var FightIndex2 = 0
     var queenpos = [Int]()
-    
     var queenposstart = [Int]()
-    
     var queenpos2 = [Int]()
-    var animationdone = true
-    var calciter = 0
-    
     var solves = 0
     
     var Foundtext = SKLabelNode(fontNamed: "Helvetica")
-    
     var SolveDisp = [SKLabelNode]()
     var Finished = 0
     var total = 0
@@ -97,23 +84,6 @@ public class ThirdScene: SKScene {
 //
 //    }
     
-    func tryall() {
-//        print("tryall")
-        print(queenpos.endIndex)
-        
-        animationdone = false
-        if queenpos[0]==(iterk){
-            Finished = 1
-            calciter = maxround+1
-        
-            movequeens()
-            
-        }
-        else{
-            movequeens()
-            
-        }
-    }
     
     func putqueen() {
             
@@ -408,87 +378,9 @@ public class ThirdScene: SKScene {
         
     }
     
-    func Finishanimation(){
-        animationdone = true
-//        print(Finishanimation)
-        if calciter < maxround && Finished == 0{
-            tryall()
-            calciter = calciter+1
-        }else if Finished == 1{
-            
-            let Node_Background = SKSpriteNode(imageNamed: "CONGRATS.png")
-            Node_Background.name = "CONGRATS"
-            Node_Background.setScale(0.01)//to show background
-            Node_Background.position = CGPoint(x: frame.midX, y: frame.midY)
-            nodes.append(Node_Background)
-            addChild(nodes[nodes.endIndex-1])
-            
-            let wait = SKAction.wait(forDuration: 0.3)
-            let resize = SKAction.scale(by: 100, duration: 0.3)
-            let showfight = SKAction.sequence([wait, resize])
-            Node_Background.run(showfight)
-            
-        }else if calciter >= maxround{
-            
-            let Node_Background = SKSpriteNode(imageNamed: "loop.png")
-            Node_Background.name = "CONGRATS"
-            Node_Background.setScale(0.01)//to show background
-            Node_Background.position = CGPoint(x: frame.midX, y: frame.midY)
-            nodes.append(Node_Background)
-            addChild(nodes[nodes.endIndex-1])
-            
-            let wait = SKAction.wait(forDuration: 0.3)
-            let resize = SKAction.scale(by: 100, duration: 0.3)
-            let showfight = SKAction.sequence([wait, resize])
-            Node_Background.run(showfight)
-            
-        }
-    }
     
     
-    func checkviable(){
-        var endcheck = 0
-        
-        for i in 0..<(queenpos.endIndex-1){
-            if endcheck == 1{
-                break
-            }else{
-                for j in (i+1)..<queenpos.endIndex{
-                    if queenpos[i] == queenpos[j]{
-                        print("pos \(i) = pos \(j)")
-                        endcheck = 1
-                        break
-                    }else if abs(queenpos[i]-queenpos[j])==abs(i-j){
-                        
-                        print("abs \(i) = abs \(j)")
-                        endcheck = 1
-                        break
-                    }
-                }
-            }
-        }
-        if endcheck == 0{
-            
-            for i in 0..<iterk{
-                var TempString = ""
-                for j in 0..<iterk{
-                    if queenpos[j]==(iterk-i-1){
-                        TempString += "👸"
-                    }else {
-                        TempString += "◻️"
-                    }
-                }
-                SolveDisp[i].text = TempString
-                
-            }
-            let action = SKAction.playSoundFileNamed("ding.wav", waitForCompletion: false)
-            self.run(action)
-            solves = solves+1
-            
-            Foundtext.text = "Found \(solves) Solves"
-        }
-    }
-
+    
 
         
          

@@ -1,25 +1,40 @@
 //: [Previous page](@previous)
 /*:
  # How can we speed up the process?
- As we can see, In brute force process. When the 👸queens in the first two rows are already fighting, the program is still trying to move the queens in other rows, which is completely waste of time.
+ As we can see, In brute force process. When the 👸queens in the first two rows are already fighting, the program is still trying to move the queens in other rows, which is a completely waste of time.
  
  
- ![BFEXAPMLE](BFEXAPMLE.jpg)
+ ![waste](waste.png)
  
- 
- Here is a search tree.
+ In order to solve this problem, we should first learn about how searches work. Here is a search tree🌲.
  
  
  ![tree](tree.png)
  
  
-Each node indicates the position of the queen on her row. The brute force algorithm goes through the whole tree. But if we can cut the brach when the first few queens are already fighting, we should be able to see a huge improvement on speed.
+Each node indicates the position of the 👸queen on her row. So the 🌲tree can represent all possible solves, which is called the search space. Search process is to find all solves in the tree. The brute force💪 algorithm goes through the whole 🌲tree. So if we can cut the brach whenever the already placed queens are fighting and stop search deeper, we should be able to see a huge improvement on speed. This is called Pruning.
  
  
  ![cutted](cutted.png)
  
  
- The way we do it is using backtracking↩️ algorithm. When one try failed, the program tracks back to the father node of the search tree and place the queen at another spot. This loops until all solves are found.
+ The way we implement it is using backtracking↩️ algorithm. When one try failed, the program tracks back to the father node of the search 🌲tree and place the queen at another spot. This loops until all solves are found.
+ 
+ The simplest way to implement the backtracking↩️ algorithm is using Recursion:
+ ```swift
+ TryPlaceQueen(at row: Int){
+ if row==👸{
+    total++;
+ }
+ else{
+     for col in 0..<👸{
+         c[row]=col
+         if is_ok(at:row){
+            queen(row+1)
+         }
+     }
+ }
+ ```
  
  
  **👇You can change the amount of queens here(4~10).**
@@ -48,35 +63,12 @@ var 🕐 = 1000
 
 //#-end-hidden-code
 👸 = /*#-editable-code number of queens♕*/8/*#-end-editable-code*/
-
 /*:
  
  **👇You can change the speed of animations by changing the wait time(1~1000).**
  
  */
-
 🕐 = /*#-editable-code move speed*/1/*#-end-editable-code*/
-
-
-
-/*:
-The simplest way to implement the algorithm is using Recursion
- 
-TryPlaceQueen(at row: Int){
- if row==👸{
-    total++;
- }
- else{
-    for col in 0..<👸{
-        c[row]=col
-        if is_ok(at:row){
-            queen(row+1)
-        }
-    }
- }
- 
- */
-
 //#-hidden-code
 
 if 🕐<1{
@@ -105,20 +97,22 @@ PlaygroundSupport.PlaygroundPage.current.liveView = sceneView
 
 //#-end-hidden-code
 /*:
- # This is going to take forever!
+ # Result: This is way faster!
  
- It seems that brute force is too slow🐢 when 👸 is too big!
- 
- 
- Let's do a small calculation:
- n queens problem have n^2Cn possible solves. So it takes 64C8 loops, which is 4426165368 loops to solve the  8 queens problem... This is gonna take forever. Let's try a different approach.
- 
- Fixing queens to seperated rows didn't help much either. It still takes 8^8 loops, which is 16777216 loops.
+ After implementing the backtracking↩️ algorithm. The improvement on speed is significant. You can try different 👸 values to see clearly how the algorithm works.
  
  
- ![nCr formula](ncr.png)
+ ![solves](solves.jpg)
+
+ 
+ The backtracking↩️ algorithm is a classic algorithm that is used in multiple problems, such as The ♘Knight’s tour problem, m 🌈Coloring Problem and Sudoku Problem. This playground should give you a more straight forward impression on the algorithm.
  
  
- **👇Just go to next page**
+ ![Sudoku](Sudoku.gif)
+ 
+ 
+ Time for a little game👾. 
+ 
+ **👇Little game👾**
  */
 //: [Another approach](@next)
