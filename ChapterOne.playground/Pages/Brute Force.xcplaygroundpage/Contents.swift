@@ -1,6 +1,10 @@
 //: [Previous page](@previous)
 /*:
  # How do we solve this puzzle?
+ 
+  ![title](2title.png)
+ 
+ 
  Having gone through the little game👾, we have learnt about the rules. We also know: This is not an easy puzzle. So how do we solve it?
  
  
@@ -56,7 +60,7 @@ var 🔁 = 100
  **👇You can change the speed of animations by changing the wait time(1~1000).**
  
  */
-🕐 = /*#-editable-code move speed*/200/*#-end-editable-code*/
+🕐 = /*#-editable-code move speed*/1/*#-end-editable-code*/
 /*:
  
  **👇You can change the max loop limit here(1~20000).**

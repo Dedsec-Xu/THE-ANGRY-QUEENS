@@ -1,5 +1,10 @@
 /*:
  # THE ANGRY QUEENS
+ 
+ 
+ ![title](1title.png)
+ 
+ 
  In this playground, you will learn about a famous algorithm problem💯 **Eight Queens Puzzle♕** through this little game🎮.
  
  By playing this little game👾, you can 📚learn about the details of this puzzle and the algorithms in the eaziest way.

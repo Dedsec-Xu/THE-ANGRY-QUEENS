@@ -11,7 +11,7 @@ public class XGame: SKScene {
     var lineWiseY : CGFloat = 0
     var jumpedAhead = false
     public var iterk = 8
-    public var MaxRound = 50
+    public var MaxRound = 10
     
     public var blank = 8
     public var waitt = 100
@@ -29,6 +29,7 @@ public class XGame: SKScene {
     var placed = 0
     
     var Foundtext = SKLabelNode(fontNamed: "Helvetica")
+    var Foundtext2 = SKLabelNode(fontNamed: "Helvetica")
     var SolveDisp = [SKLabelNode]()
     var Finished = 0
     var total = 0
@@ -42,7 +43,7 @@ public class XGame: SKScene {
     
     var BGM = AVAudioPlayer()
     var attacker = 0
-    var round = 0
+    var round = 1
     var lastround = 0
     var Node_Congrats = SKSpriteNode(imageNamed: "CONGRATS.png")
     
@@ -89,7 +90,8 @@ public class XGame: SKScene {
                 gameStatus = .running
             case .running:
                 for touch in touches {
-                    
+                    let action = SKAction.playSoundFileNamed("Pop.wav", waitForCompletion: false)
+                    self.run(action)
                     print("tapped")
                     let position = touch.location(in: self)
                     print(position)
@@ -193,7 +195,7 @@ public class XGame: SKScene {
         
         
         
-        lastround = Int(floor(Double(MaxRound)/Double(iterk)))
+        lastround = Int(floor(Double(MaxRound-1)/Double(iterk-1))+0.5)
         if lastround<1{
             lastround = 1
         }
@@ -206,6 +208,13 @@ public class XGame: SKScene {
         Node_Background.position = CGPoint(x: frame.midX, y: frame.midY)
         nodes.append(Node_Background)
         addChild(nodes[nodes.endIndex-1])
+        
+        Foundtext2.text = "Place 1 Queens"
+        Foundtext2.fontSize = 30.0
+        Foundtext2.fontColor = SKColor.yellow
+        Foundtext2.position = CGPoint(x: self.frame.midX, y: 580)
+        addChild(Foundtext2)
+        
         Foundtext.text = "Round 1 of \(MaxRound) rounds"
         Foundtext.fontSize = 30.0
         Foundtext.fontColor = SKColor.yellow
@@ -216,7 +225,6 @@ public class XGame: SKScene {
         Node_Congrats.setScale(0.01)//to show background
         Node_Congrats.position = CGPoint(x: frame.midX, y: frame.midY)
         Node_Congrats.alpha = 0
-        addChild(Node_Congrats)
         
         BGM.play()
         
@@ -255,6 +263,7 @@ public class XGame: SKScene {
             showChess(n:i1)
         }
         
+        addChild(Node_Congrats)
         randomqueen(ThrowAway: 1)
         
         gameStatus = .running
@@ -366,7 +375,7 @@ public class XGame: SKScene {
 
         let wait = SKAction.wait(forDuration: 0.3)
         let resize = SKAction.scale(by: 100, duration: 0.3)
-        let showfight = SKAction.sequence([wait,resize])
+        let showfight = SKAction.sequence([wait,resize,wait])
         
         let action = SKAction.playSoundFileNamed("Yay.mp3", waitForCompletion: false)
         self.run(action)
@@ -380,20 +389,43 @@ public class XGame: SKScene {
 
     func nextround()  {
         
-        round=round+1
-        Foundtext.text = "Round \(round) of \(MaxRound) rounds"
-        print("nextround:\(round)")
-        print("lastround:\(lastround)")
         
-        var drop = round/lastround+1
-        if drop>iterk{
-            drop=iterk
+        round=round+1
+        if round==(MaxRound+1)
+        {
+            Node_Congrats.setScale(0.01)
+            Node_Congrats.alpha = 1
+            let wait = SKAction.wait(forDuration: 0.3)
+            let resize = SKAction.scale(by: 100, duration: 0.3)
+            let showfight = SKAction.sequence([wait,resize,wait])
+            Node_Congrats.run(showfight)
+            gameStatus = .over
         }
-        print("\(drop)")
-        randomqueen(ThrowAway: drop)
-        Node_Congrats.setScale(0.01)
-        Node_Congrats.alpha = 0
-        gameStatus = .running
+        else{
+            Foundtext.text = "Round \(round) of \(MaxRound) rounds"
+            print("nextround:\(round)")
+            print("lastround:\(lastround)")
+            
+            
+            var drop = round/lastround+1
+            if (drop==iterk)&&(round<MaxRound){
+                drop = iterk-1 
+            }
+            if round==MaxRound{
+                drop = iterk
+            }
+            if drop>iterk{
+                drop=iterk
+            }
+            print("\(drop)")
+            
+            Foundtext2.text = "Place \(drop) Queens"
+            randomqueen(ThrowAway: drop)
+            Node_Congrats.setScale(0.01)
+            Node_Congrats.alpha = 0
+            gameStatus = .running
+        }
+        
         
         
     }

@@ -66,7 +66,11 @@ public class FirstScene: SKScene {
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         switch gameStatus {
             case .idle:
+                
+                gameStatus = .running
+                BGM.play()
                 startGame()
+            
             case .running:
                 for touch in touches {
                     let position = touch.location(in: self)
@@ -157,15 +161,13 @@ public class FirstScene: SKScene {
     
     func startGame()  {
         
-        BGM.play()
         let Node_Background = SKSpriteNode(imageNamed: "back.png")
         Node_Background.name = "background"
         Node_Background.setScale(1)//to show background
         Node_Background.position = CGPoint(x: frame.midX, y: frame.midY)
         nodes.append(Node_Background)
         addChild(nodes[nodes.endIndex-1])
-        let action = SKAction.playSoundFileNamed("It_Devours.mp3", waitForCompletion: false)
-        self.run(action)
+
 
         
         //start

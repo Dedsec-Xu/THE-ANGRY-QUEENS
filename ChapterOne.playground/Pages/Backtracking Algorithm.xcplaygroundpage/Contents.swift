@@ -1,6 +1,9 @@
 //: [Previous page](@previous)
 /*:
  # How can we speed up the process?
+ 
+  ![title](3title.png)
+ 
  As we can see, In brute force process. When the 👸queens in the first two rows are already fighting, the program is still trying to move the queens in other rows, which is a completely waste of time.
  
  
@@ -62,13 +65,13 @@ var 😡 = true
 var 🕐 = 1000
 
 //#-end-hidden-code
-👸 = /*#-editable-code number of queens♕*/4/*#-end-editable-code*/
+👸 = /*#-editable-code number of queens♕*/8/*#-end-editable-code*/
 /*:
  
  **👇You can change the speed of animations by changing the wait time(1~1000).**
  
  */
-🕐 = /*#-editable-code move speed*/200/*#-end-editable-code*/
+🕐 = /*#-editable-code move speed*/1/*#-end-editable-code*/
 //#-hidden-code
 
 if 🕐<1{

@@ -2,10 +2,12 @@
 /*:
  # Let's play a game😎
  
- Put down the missing queens as soon as possible. Putting down a queen will earn you some more time
+  ![title](4title.png)
+ 
+ Put down the missing 👸queens as soon as possible. The difiicluty is increasing over time. You can change the variables of the game as you want.
  
  
- **Explore the game at your own pace.**
+ **Explore the game🎮 at your own pace.**
  
  **👇You can change the total amount of queens here(4~10).**
  */
@@ -28,11 +30,15 @@ sceneView.showsNodeCount = true
 
 let scene = XGame(size: CGSize(width: 480, height: 640))
 var 👸 = 4
-var 🔳 = 4
+var 🎮 = 4
 
 //#-end-hidden-code
-👸 = /*#-editable-code number of queens♕*/8/*#-end-editable-code*/
-🔳 = /*#-editable-code number of queens♕*/8/*#-end-editable-code*/
+👸 = /*#-editable-code number of queens♕*/4/*#-end-editable-code*/
+/*:
+ **👇You can change the max round of the game here(10~100).**
+*/
+
+🎮 = /*#-editable-code number of queens♕*/50/*#-end-editable-code*/
 //#-hidden-code
 
 
@@ -44,12 +50,12 @@ if 👸<4{
     scene.iterk = 👸
 }
 
-if 🔳<1{
-    scene.blank = 1
-}else if 🔳 > 👸{
-    scene.blank = 👸
+if 🎮<10{
+    scene.MaxRound = 10
+}else if 🎮 > 100{
+    scene.MaxRound = 1000
 }else{
-    scene.blank = 🔳
+    scene.MaxRound = 🎮
 }
 
 scene.scaleMode = .aspectFill
@@ -61,22 +67,10 @@ PlaygroundSupport.PlaygroundPage.current.liveView = sceneView
 
 //#-end-hidden-code
 /*:
- # Result: This is way faster!
+ # 🎊THE END!🎊
  
- After implementing the backtracking↩️ algorithm. The improvement on speed is significant. You can try different 👸 values to see clearly how the algorithm works.
+ This is the end of my playground. I put a lot of effort into it. I hope you enjoyed it.
  
- 
- ![solves](solves.jpg)
- 
- 
- The backtracking↩️ algorithm is a classic algorithm that is used in multiple problems, such as The ♘Knight’s tour problem, m 🌈Coloring Problem and Sudoku Problem. This playground should give you a more straight forward impression on the algorithm.
- 
- 
- ![Sudoku](Sudoku.gif)
- 
- 
- Time for a little game👾.
- 
- **👇Little game👾**
+ #THANK YOU🙏 VERY MUCH FOR PLAYING!😄
  */
 //: [Another approach](@next)
