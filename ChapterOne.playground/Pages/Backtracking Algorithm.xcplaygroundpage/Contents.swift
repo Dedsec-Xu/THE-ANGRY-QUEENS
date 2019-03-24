@@ -4,7 +4,7 @@
  As we can see, In brute force process. When the 👸queens in the first two rows are already fighting, the program is still trying to move the queens in other rows, which is completely waste of time.
  
  
- ![bf](bf.gif)
+ ![BFEXAPMLE](BFEXAPMLE.jpg)
  
  
  Here is a search tree.
@@ -19,12 +19,10 @@ Each node indicates the position of the queen on her row. The brute force algori
  ![cutted](cutted.png)
  
  
- The way we do it is using backtracking algorithm. When one try failed, the program tracks back to the father node and place the queen at another spot. This loops until all solves are found.
- 
- How about we try brute force? Brute force is going through all the possible placement and save all answers.
+ The way we do it is using backtracking↩️ algorithm. When one try failed, the program tracks back to the father node of the search tree and place the queen at another spot. This loops until all solves are found.
  
  
- **👇You can change the amount of queens here(4~20), Let's try small amounts first. (numbers larger than 5 will no finish)**
+ **👇You can change the amount of queens here(4~10).**
  */
 //#-hidden-code
 import PlaygroundSupport
@@ -47,37 +45,37 @@ let scene = ThirdScene(size: CGSize(width: 480, height: 640))
 var 👸 = 4
 var 😡 = true
 var 🕐 = 1000
-var 🔁 = 100
 
 //#-end-hidden-code
-👸 = /*#-editable-code number of queens♕*/5/*#-end-editable-code*/
+👸 = /*#-editable-code number of queens♕*/8/*#-end-editable-code*/
 
 /*:
  
- **👇You can change the speed of animations by changing the wait time(1~100000).**
+ **👇You can change the speed of animations by changing the wait time(1~1000).**
  
  */
 
-🕐 = /*#-editable-code move speed*/10/*#-end-editable-code*/
+🕐 = /*#-editable-code move speed*/1/*#-end-editable-code*/
+
+
 
 /*:
+The simplest way to implement the algorithm is using Recursion
  
- **👇You can change the max loop limit here(1~20000).**
+TryPlaceQueen(at row: Int){
+ if row==👸{
+    total++;
+ }
+ else{
+    for col in 0..<👸{
+        c[row]=col
+        if is_ok(at:row){
+            queen(row+1)
+        }
+    }
+ }
  
  */
-
-🔁 = /*#-editable-code move speed*/10000/*#-end-editable-code*/
-
-/*:
- **This 👇LOOP**
- */
-if 😡==false{
-    //save
-}else{
-    //wait for 🕐 ms
-    //ChangeQueenPosition
-    //if looptime>🔁 break
-}
 
 //#-hidden-code
 
@@ -89,17 +87,10 @@ if 🕐<1{
     scene.waitt = 🕐
 }
 
-if 🔁<1{
-    scene.maxround = 1
-}else if 🔁 > 20000{
-    scene.maxround = 20000
-}else{
-    scene.maxround = 🔁
-}
 
 if 👸<4{
     scene.iterk = 3
-}else if 👸 > 20{
+}else if 👸 > 10{
     scene.iterk = 20
 }else{
     scene.iterk = 👸

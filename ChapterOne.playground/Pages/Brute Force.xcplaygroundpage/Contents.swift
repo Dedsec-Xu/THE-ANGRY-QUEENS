@@ -10,7 +10,7 @@
  How about we try brute force? Brute force is going through all the possible placement and save all answers.
  
  
- **👇You can change the amount of queens here(4~20), Let's try small amounts first. (numbers larger than 5 will no finish)**
+ **👇You can change the amount of queens here(4~10), Let's try small amounts first. (numbers larger than 5 will no finish)**
  */
 //#-hidden-code
 import PlaygroundSupport
@@ -58,9 +58,9 @@ var 🔁 = 100
  **This 👇LOOP**
  */
 if 😡==false{
-    //save
+    //save💾
 }else{
-    //wait for 🕐 ms
+    //wait for 🕐 
     //ChangeQueenPosition
     //if looptime>🔁 break
 }
@@ -85,7 +85,7 @@ if 🔁<1{
 
 if 👸<4{
     scene.iterk = 3
-}else if 👸 > 20{
+}else if 👸 > 10{
     scene.iterk = 20
 }else{
     scene.iterk = 👸

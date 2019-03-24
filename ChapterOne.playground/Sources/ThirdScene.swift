@@ -42,6 +42,8 @@ public class ThirdScene: SKScene {
     var lastdisprow = 0
     var currentrow = 0
     var endloop = 0
+    
+    var draw = 0
 
     
     
@@ -59,7 +61,7 @@ public class ThirdScene: SKScene {
     
     public override func didMove(to view: SKView) {
         
-        let Node_Title = SKSpriteNode(imageNamed: "title2.png")
+        let Node_Title = SKSpriteNode(imageNamed: "backtracking.png")
         Node_Title.name = "background"
         Node_Title.setScale(1)//to show background
         Node_Title.position = CGPoint(x: frame.midX, y: frame.midY)
@@ -124,7 +126,7 @@ public class ThirdScene: SKScene {
         queenpos2[currentrow] = queenposstart[currentrow]
         
         queenposstart[currentrow] = queenpos2[currentrow]+1
-        if currentrow==0&&queenpos2[currentrow]==iterk{
+        if (currentrow==0)&&(queenpos2[currentrow]>=iterk){
             endloop = 1
         }else if queenpos2[currentrow]==iterk{
             queenpos2[currentrow] = 0
@@ -134,6 +136,7 @@ public class ThirdScene: SKScene {
         }else if queenpos2[currentrow]<iterk&&is_ok(at: currentrow)&&currentrow<(iterk-1){
 //            print("is_ok(at: \(currentrow)")
             currentrow = currentrow+1
+            draw = 1
         }
         else if currentrow==iterk-1&&is_ok(at: currentrow){
             total = total+1
@@ -156,6 +159,7 @@ public class ThirdScene: SKScene {
             
             Foundtext.text = "Found \(total) Solves"
         }
+        
         for it in (currentrow+1)..<iterk{
             queens[it].alpha = 0.25
         }
@@ -163,19 +167,39 @@ public class ThirdScene: SKScene {
             queens[it].alpha = 1
         }
         
-        let posx = CGFloat((Double(currentrow)*boxsize)+40.0+boxsize/2)
-        let posy = CGFloat((Double(queenpos2[currentrow]%iterk)*boxsize)+120.0+boxsize/2)
-        let point = CGPoint(x: posx, y: posy)
-
-        let move1 = SKAction.move(to: point, duration: (Double(waitt)/100000))
-        if endloop==0{
-            queens[currentrow].run(move1, completion: {
-                self.putqueen()
-            })
+        if draw==0{
+            if endloop==0{
+                putqueen()
+            }
+            
+                
         }
         else{
+            draw = 0
+            print("\(currentrow)")
+            let posx = CGFloat((Double(currentrow-1)*boxsize)+40.0+boxsize/2)
+            let posy = CGFloat((Double(queenpos2[currentrow-1]%iterk)*boxsize)+120.0+boxsize/2)
+            let point = CGPoint(x: posx, y: posy)
+            
+            let move1 = SKAction.move(to: point, duration: (Double(waitt)/100000))
+            if endloop==0{
+                queens[currentrow-1].run(move1, completion: {
+                    self.putqueen()
+                })
+            }
+            
+        }
+        
+        if endloop==1{
+            
             for it in 0..<iterk{
                 queens[it].alpha = 1
+                let posx = CGFloat((Double(it)*boxsize)+40.0+boxsize/2)
+                let posy = CGFloat((Double(queenpos2[it]%iterk)*boxsize)+120.0+boxsize/2)
+                let point = CGPoint(x: posx, y: posy)
+                
+                let move1 = SKAction.move(to: point, duration: (Double(waitt)/100000))
+                queens[it].run(move1)
             }
             let Node_Background = SKSpriteNode(imageNamed: "CONGRATS.png")
             Node_Background.name = "CONGRATS"
